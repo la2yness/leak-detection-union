@@ -4,7 +4,9 @@
 :root {
   --navy: #0B1740;
   --navy-soft: #33406B;
+  --navy-soft-2: #3F4E85;
   --green: #16A34A;
+  --green-2: #129048;
   --green-dark: #0F8A3C;
   --green-light: #ECFDF3;
   --cyan: #29B6F6;
@@ -68,9 +70,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .btn-cta { background: var(--green); color: var(--white); box-shadow: var(--shadow-lg); }
 .btn-cta:hover { background: var(--green-dark); }
-
-.btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.6); }
-.btn-outline:hover { background: rgba(255,255,255,.12); }
+.btn-cta.num-2 { background: var(--green-2); }
 
 /* ==========================================================================
    Top bar
@@ -95,32 +95,36 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .logo-icon { display: flex; flex-shrink: 0; }
 .logo-text { font-size: 15px; font-weight: 900; color: var(--navy); white-space: nowrap; }
 
+.topbar-phones { display: flex; align-items: center; gap: 5px; }
+
 .topbar-phone {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 4px;
   min-height: 44px;
-  font-size: 14px;
+  font-size: 10.5px;
   font-weight: 700;
   color: var(--white);
   background: var(--green);
   border-radius: var(--radius-sm);
-  padding: 0 16px;
+  padding: 0 8px;
   white-space: nowrap;
   box-shadow: var(--shadow);
 }
 .topbar-phone:hover { background: var(--green-dark); transform: translateY(-1px); }
 .topbar-phone { transition: background var(--trans), transform var(--trans); }
+.topbar-phone.num-2 { background: var(--green-2); }
 
 @media (min-width: 480px) {
   .logo-text { font-size: 18px; }
-  .topbar-phone { font-size: 15px; padding: 0 20px; }
+  .topbar-phones { gap: 8px; }
+  .topbar-phone { font-size: 13px; padding: 0 14px; }
 }
 @media (min-width: 1024px) {
   .topbar-inner { max-width: 1040px; }
   .logo-text { font-size: 20px; }
-  .topbar-phone { font-size: 16px; padding: 0 24px; }
+  .topbar-phone { font-size: 15px; padding: 0 20px; }
 }
 
 /* ==========================================================================
@@ -163,7 +167,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   max-width: 420px;
   margin: 0 auto 28px;
 }
-.hero .btn-cta { width: 100%; max-width: 380px; }
+.hero-cta-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 380px;
+}
+.hero .btn-cta { width: 100%; }
 
 .hero-visual { display: none; }
 
@@ -186,6 +197,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   }
   .hero-text { flex: 1; max-width: 520px; }
   .hero-sub { margin: 0 0 32px; }
+  .hero-cta-buttons { flex-direction: row; width: auto; max-width: none; }
   .hero .btn-cta { width: auto; }
   .hero-visual {
     display: flex;
@@ -387,16 +399,17 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   color: var(--white);
   background: var(--navy-soft);
+  white-space: nowrap;
   transition: background var(--trans);
 }
 .bottom-bar-btn:hover { background: #3D4C80; }
-.bottom-bar-accent { background: var(--green); }
-.bottom-bar-accent:hover { background: var(--green-dark); }
+.bottom-bar-btn.num-2 { background: var(--navy-soft-2); }
+.bottom-bar-btn.num-2:hover { background: #4A5A96; }
 
 /* ==========================================================================
    Clipboard toast
