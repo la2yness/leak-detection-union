@@ -14,13 +14,19 @@ index.html
 css/style.css
 js/main.js
 images/
-  business/business-registration.jpg   사업자등록증 (원본, 추후 블러본으로 교체 예정)
+  business/business-registration.jpg   사업자등록증
+  work/work-01.jpg ~ work-12.jpg       현장 작업사진 갤러리에 쓰이는 사진
   icon-192.png, og-image.jpg
 favicon.ico
 apple-touch-icon.png
 robots.txt
 sitemap.xml
 ```
+
+## 주요 섹션
+
+- TODO: 리뷰 슬롯
+- `현장 작업사진` 갤러리: `images/work/`의 사진을 그리드로 보여주고, 클릭 시 이전/다음 전환 애니메이션이 있는 라이트박스로 확대
 
 ## 배포
 

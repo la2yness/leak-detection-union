@@ -387,7 +387,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   transition: transform var(--trans), box-shadow var(--trans);
 }
 @media (min-width: 640px) {
-  .gallery-item { aspect-ratio: 3 / 4; }
+  .gallery-item { aspect-ratio: 4 / 3; }
 }
 .gallery-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
 .gallery-item:active { transform: scale(.95); }
