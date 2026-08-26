@@ -380,6 +380,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   box-shadow: var(--shadow);
   transition: transform var(--trans), box-shadow var(--trans);
 }
+@media (min-width: 640px) {
+  .gallery-item { aspect-ratio: 3 / 4; }
+}
 .gallery-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
 .gallery-item:active { transform: scale(.95); }
 .gallery-item img {
@@ -415,6 +418,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .lightbox-prev,
 .lightbox-next {
   position: fixed;
+  z-index: 1;
   color: var(--white);
   font-size: 28px;
   line-height: 1;
@@ -423,6 +427,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   border-radius: 999px;
   transition: background var(--trans);
 }
+.lightbox-prev, .lightbox-next { font-size: 20px; padding: 12px 16px; }
 .lightbox-close:hover,
 .lightbox-prev:hover,
 .lightbox-next:hover { background: rgba(255,255,255,.24); }
