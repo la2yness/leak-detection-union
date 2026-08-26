@@ -417,23 +417,29 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   object-fit: contain;
   border-radius: var(--radius-sm);
   transform: scale(.9);
-  transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+  opacity: 1;
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1), opacity .18s ease;
 }
 .lightbox.open .lightbox-img { transform: scale(1); }
+.lightbox-img.switching { opacity: 0; transform: scale(.97); }
 .lightbox-close,
 .lightbox-prev,
 .lightbox-next {
   position: fixed;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
   color: var(--white);
   font-size: 28px;
   line-height: 1;
-  padding: 10px 14px;
   background: rgba(255,255,255,.12);
   border-radius: 999px;
   transition: background var(--trans);
 }
-.lightbox-prev, .lightbox-next { font-size: 20px; padding: 12px 16px; }
+.lightbox-prev, .lightbox-next { font-size: 20px; }
 .lightbox-close:hover,
 .lightbox-prev:hover,
 .lightbox-next:hover { background: rgba(255,255,255,.24); }

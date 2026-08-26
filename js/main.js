@@ -82,6 +82,14 @@
       lightboxImg.setAttribute('src', src);
     }
 
+    function goToImage(index) {
+      lightboxImg.classList.add('switching');
+      setTimeout(function () {
+        showImage(index);
+        lightboxImg.classList.remove('switching');
+      }, 180);
+    }
+
     function openLightbox(index) {
       showImage(index);
       lightbox.classList.add('open');
@@ -97,8 +105,8 @@
     });
 
     lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
-    lightbox.querySelector('.lightbox-prev').addEventListener('click', function () { showImage(currentIndex - 1); });
-    lightbox.querySelector('.lightbox-next').addEventListener('click', function () { showImage(currentIndex + 1); });
+    lightbox.querySelector('.lightbox-prev').addEventListener('click', function () { goToImage(currentIndex - 1); });
+    lightbox.querySelector('.lightbox-next').addEventListener('click', function () { goToImage(currentIndex + 1); });
 
     lightbox.addEventListener('click', function (e) {
       if (e.target === lightbox) closeLightbox();
@@ -107,8 +115,8 @@
     document.addEventListener('keydown', function (e) {
       if (!lightbox.classList.contains('open')) return;
       if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft') showImage(currentIndex - 1);
-      if (e.key === 'ArrowRight') showImage(currentIndex + 1);
+      if (e.key === 'ArrowLeft') goToImage(currentIndex - 1);
+      if (e.key === 'ArrowRight') goToImage(currentIndex + 1);
     });
   }
 })();
