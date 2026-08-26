@@ -89,7 +89,7 @@
 
     function closeLightbox() {
       lightbox.classList.remove('open');
-      lightboxImg.setAttribute('src', '');
+      setTimeout(function () { lightboxImg.setAttribute('src', ''); }, 200);
     }
 
     galleryItems.forEach(function (item, index) {
