@@ -447,12 +447,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* ==========================================================================
    서비스 지역
    ========================================================================== */
-.area-section { padding: 40px 0; background: var(--white); }
+.area-section { padding: 44px 0; background: var(--white); }
 .area-panel {
-  max-width: 520px;
-  margin: 0 auto;
   text-align: center;
-  padding: 32px 28px;
+  padding: 36px 28px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--off-white);
@@ -485,9 +483,42 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .area-panel-desc {
   font-size: 14.5px;
   color: var(--muted);
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
-.area-panel-btn { width: 100%; }
+.area-districts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+.area-districts span {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--navy);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 11px;
+}
+.area-footer {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.area-gyeonggi {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+.area-panel-btn {
+  width: 100%;
+  color: var(--white);
+  background: var(--navy);
+  box-shadow: var(--shadow-lg);
+}
+.area-panel-btn:hover { background: var(--navy-soft); }
 @media (min-width: 480px) {
   .area-panel-btn { width: auto; }
 }
