@@ -448,6 +448,54 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .lightbox-next { right: 16px; top: 50%; transform: translateY(-50%); }
 
 /* ==========================================================================
+   서비스 지역
+   ========================================================================== */
+.area-section { padding: 40px 0; background: var(--white); }
+.area-panel {
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 32px 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--off-white);
+  box-shadow: var(--shadow);
+}
+.area-panel-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  background: var(--green-light);
+  color: var(--green-dark);
+  margin-bottom: 14px;
+}
+.area-panel-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: .02em;
+  margin-bottom: 6px;
+}
+.area-panel-title {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+.area-panel-desc {
+  font-size: 14.5px;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+.area-panel-btn { width: 100%; }
+@media (min-width: 480px) {
+  .area-panel-btn { width: auto; }
+}
+
+/* ==========================================================================
    제공 서비스
    ========================================================================== */
 .services-detail { padding: 44px 0 48px; background: var(--off-white); }
