@@ -448,6 +448,81 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .lightbox-next { right: 16px; top: 50%; transform: translateY(-50%); }
 
 /* ==========================================================================
+   제공 서비스
+   ========================================================================== */
+.services-detail { padding: 44px 0 48px; background: var(--off-white); }
+.services-detail .container { max-width: 960px; }
+.services-detail h2 {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--navy);
+  text-align: center;
+  margin-bottom: 6px;
+}
+.services-detail > .container > p {
+  font-size: 15px;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 24px;
+}
+.service-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 560px) {
+  .service-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 900px) {
+  .service-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.service-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 22px;
+  box-shadow: var(--shadow);
+}
+.service-card .svc-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-sm);
+  background: var(--green-light);
+  color: var(--green-dark);
+  margin-bottom: 14px;
+}
+.service-card h3 {
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.service-card > p {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.service-card ul { list-style: none; }
+.service-card li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 7px;
+}
+.service-card li:last-child { margin-bottom: 0; }
+.service-card li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-weight: 900;
+}
+
+/* ==========================================================================
    Final CTA
    ========================================================================== */
 .final-cta {

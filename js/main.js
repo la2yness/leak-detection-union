@@ -3,7 +3,7 @@
 
   /* Scroll reveal for below-the-fold sections */
   var revealTargets = document.querySelectorAll(
-    '.services-strip .container, .reviews-head, .marquee-row, .quick-facts-grid .fact, .final-cta .container'
+    '.services-strip .container, .reviews-head, .marquee-row, .quick-facts-grid .fact, .services-detail .service-card, .final-cta .container'
   );
   revealTargets.forEach(function (el) { el.classList.add('reveal'); });
 
