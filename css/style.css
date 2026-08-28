@@ -248,7 +248,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    Services strip
    ========================================================================== */
 .services-strip {
-  background: var(--off-white);
+  background: #E7ECF6;
   padding: 22px 0;
   text-align: center;
 }
@@ -339,6 +339,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .marquee-left { animation: marquee-scroll 50s linear infinite; }
 .marquee-right { animation: marquee-scroll-reverse 50s linear infinite; }
 
+@media (max-width: 639px) {
+  .marquee-left, .marquee-right { animation-duration: 76s; }
+}
+
 .marquee-row:hover .marquee-track { animation-play-state: paused; }
 
 @keyframes marquee-scroll {
@@ -352,7 +356,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .review-photo {
   flex-shrink: 0;
-  height: 200px;
+  height: 220px;
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--off-white);
@@ -369,7 +373,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 @media (min-width: 640px) {
-  .review-photo { height: 248px; }
+  .review-photo { height: 273px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -515,13 +519,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   color: var(--green-dark);
   margin-bottom: 14px;
 }
-.area-panel-label {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--muted);
-  letter-spacing: .02em;
-  margin-bottom: 6px;
-}
 .area-panel-title {
   font-size: 22px;
   font-weight: 900;
@@ -556,7 +553,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   border-top: 1px solid var(--border);
 }
 .area-gyeonggi {
-  font-size: 14px;
+  font-size: 15.5px;
+  line-height: 1.6;
   color: var(--muted);
   margin-bottom: 16px;
 }
