@@ -16,6 +16,7 @@ js/main.js
 images/
   business/business-registration.jpg   사업자등록증
   work/work-01.jpg ~ work-12.jpg       현장 작업사진 갤러리에 쓰이는 사진
+  review/review-01.png ~ review-18.png  고객 후기 캡처 이미지
   icon-192.png, og-image.jpg
 favicon.ico
 apple-touch-icon.png
@@ -25,8 +26,15 @@ sitemap.xml
 
 ## 주요 섹션
 
-- TODO: 리뷰 슬롯
-- `현장 작업사진` 갤러리: `images/work/`의 사진을 그리드로 보여주고, 클릭 시 이전/다음 전환 애니메이션이 있는 라이트박스로 확대
+전화 유도를 목적으로 한 한 페이지 구성. 위에서부터 순서대로 이어진다.
+
+- 히어로: 슬로건과 두 개의 전화번호 CTA 버튼
+- 특장점 띠: 경력·A/S·장비를 짧게 요약
+- 고객 후기: `images/review/`의 후기를 좌우로 흐르는 마퀴로 보여주고, 이미지 클릭 시 이전/다음 전환이 있는 라이트박스로 확대
+- 서비스 지역: 서울 25개 구를 나열하고 경기 인접 지역은 전화로 안내
+- 현장 작업사진: `images/work/`의 작업사진을 그리드로 보여주고, 사진 클릭 시 이전/다음 전환이 있는 라이트박스로 확대
+- 제공 서비스: 누수탐지·막힘·배관·위생기기 등 6개 분류를 카드로 정리
+- 상단 고정 바와 하단 고정 통화 바로 어느 위치에서든 바로 전화 연결
 
 ## 배포
 
@@ -34,8 +42,4 @@ sitemap.xml
 
 ## 남은 작업 (TODO)
 
-- [ ] 실제 고객 후기 확보 후 `.marquee-track`(2줄)의 `.review-chip` 플레이스홀더 문구를 실제 후기로 교체
-- [ ] 서비스 지역이 확정되면 `.quick-facts`의 "종로 기반 · 수도권 방문" 문구를 구체적인 지역명으로 교체
-- [ ] `images/business/business-registration.jpg`를 생년월일 블러 처리된 버전으로 교체
-- [ ] GA4 / 네이버 애널리틱스 추적 ID 발급 후 `index.html` `<head>`의 TODO 주석 위치에 삽입
-- [ ] 카카오 상담 채널(오픈채팅/채널) 준비 시 CTA 버튼 추가 고려
+- 모바일 링크 미리보기 이미지 작업.

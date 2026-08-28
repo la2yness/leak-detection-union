@@ -647,7 +647,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   text-align: center;
   padding: 48px 0;
 }
-.final-cta h2 { font-size: 24px; font-weight: 900; margin-bottom: 22px; }
+.final-cta h2 { font-size: 20px; font-weight: 900; line-height: 1.5; word-break: keep-all; margin-bottom: 22px; }
 .final-cta-buttons {
   display: flex;
   flex-direction: column;
@@ -656,6 +656,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   margin: 0 auto;
 }
 @media (min-width: 480px) {
+  .final-cta h2 { font-size: 24px; }
   .final-cta-buttons { flex-direction: row; justify-content: center; max-width: none; }
 }
 
