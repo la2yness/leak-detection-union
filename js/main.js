@@ -68,18 +68,17 @@
     });
   }
 
-  /* Work gallery lightbox */
-  var galleryItems = document.querySelectorAll('.gallery-item');
+  /* Lightbox (work gallery + reviews) */
   var lightbox = document.getElementById('lightbox');
 
-  if (galleryItems.length && lightbox) {
+  if (lightbox) {
     var lightboxImg = lightbox.querySelector('.lightbox-img');
+    var activeList = [];
     var currentIndex = 0;
 
     function showImage(index) {
-      currentIndex = (index + galleryItems.length) % galleryItems.length;
-      var src = galleryItems[currentIndex].querySelector('img').getAttribute('src');
-      lightboxImg.setAttribute('src', src);
+      currentIndex = (index + activeList.length) % activeList.length;
+      lightboxImg.setAttribute('src', activeList[currentIndex]);
     }
 
     function goToImage(index) {
@@ -90,7 +89,8 @@
       }, 180);
     }
 
-    function openLightbox(index) {
+    function openLightbox(list, index) {
+      activeList = list;
       showImage(index);
       lightbox.classList.add('open');
     }
@@ -100,9 +100,29 @@
       setTimeout(function () { lightboxImg.setAttribute('src', ''); }, 200);
     }
 
-    galleryItems.forEach(function (item, index) {
-      item.addEventListener('click', function () { openLightbox(index); });
-    });
+    var galleryItems = document.querySelectorAll('.gallery-item');
+    if (galleryItems.length) {
+      var gallerySrcs = Array.prototype.map.call(galleryItems, function (item) {
+        return item.querySelector('img').getAttribute('src');
+      });
+      galleryItems.forEach(function (item, index) {
+        item.addEventListener('click', function () { openLightbox(gallerySrcs, index); });
+      });
+    }
+
+    var reviewImgs = document.querySelectorAll('.review-photo:not([aria-hidden]) img');
+    if (reviewImgs.length) {
+      var reviewSrcs = Array.prototype.map.call(reviewImgs, function (img) {
+        return img.getAttribute('src');
+      });
+      document.querySelectorAll('.review-photo').forEach(function (photo) {
+        photo.addEventListener('click', function () {
+          var src = photo.querySelector('img').getAttribute('src');
+          var idx = reviewSrcs.indexOf(src);
+          openLightbox(reviewSrcs, idx < 0 ? 0 : idx);
+        });
+      });
+    }
 
     lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
     lightbox.querySelector('.lightbox-prev').addEventListener('click', function () { goToImage(currentIndex - 1); });
