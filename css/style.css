@@ -269,6 +269,32 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* ==========================================================================
+   서비스 소개
+   ========================================================================== */
+.service-intro { padding: 36px 0; background: var(--white); }
+.service-intro-title {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--navy);
+  text-align: center;
+  margin-bottom: 14px;
+  word-break: keep-all;
+}
+.service-intro p {
+  font-size: 14.5px;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 10px;
+  word-break: keep-all;
+}
+.service-intro-lead { color: var(--navy); font-weight: 700; }
+@media (min-width: 640px) {
+  .service-intro { padding: 48px 0; }
+  .service-intro-title { font-size: 24px; }
+  .service-intro p { font-size: 16px; }
+}
+
+/* ==========================================================================
    특장점 띠
    ========================================================================== */
 .highlight-strip {
@@ -530,23 +556,46 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   color: var(--muted);
   margin-bottom: 18px;
 }
-.area-districts {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 6px;
-  max-width: 560px;
+.area-groups {
+  max-width: 600px;
   margin: 0 auto;
+  text-align: left;
 }
-.area-districts span {
-  font-size: 12.5px;
-  font-weight: 600;
+.area-group {
+  border-top: 1px solid var(--border);
+}
+.area-group:last-child { border-bottom: 1px solid var(--border); }
+.area-group-name {
+  display: block;
+  list-style: none;
+  cursor: pointer;
+  padding: 12px 26px 12px 2px;
+  font-size: 13.5px;
+  font-weight: 900;
   color: var(--navy);
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 5px 11px;
+  position: relative;
+  word-break: keep-all;
 }
+.area-group-name::-webkit-details-marker { display: none; }
+.area-group-name::after {
+  content: "+";
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--green-dark);
+}
+.area-group[open] .area-group-name::after { content: "\2212"; }
+.area-group-dongs {
+  font-size: 12.5px;
+  line-height: 1.8;
+  color: var(--muted);
+  padding: 0 2px 14px;
+  word-break: keep-all;
+}
+.area-group-dongs b { color: var(--navy); font-weight: 700; }
 .area-footer {
   margin-top: 22px;
   padding-top: 20px;
@@ -636,6 +685,61 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   left: 0;
   color: var(--green);
   font-weight: 900;
+}
+
+/* ==========================================================================
+   증상별 서비스
+   ========================================================================== */
+.symptom-section { padding: 44px 0; background: var(--white); }
+.symptom-section .container { max-width: 960px; }
+.symptom-section h2 {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--navy);
+  text-align: center;
+  margin-bottom: 6px;
+}
+.symptom-section > .container > p {
+  font-size: 15px;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 24px;
+}
+.symptom-list { display: grid; gap: 10px; }
+.symptom-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--off-white);
+}
+.symptom-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 14px 42px 14px 18px;
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--navy);
+  position: relative;
+  word-break: keep-all;
+}
+.symptom-item summary::-webkit-details-marker { display: none; }
+.symptom-item summary::after {
+  content: "+";
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--green-dark);
+}
+.symptom-item[open] summary::after { content: "\2212"; }
+.symptom-item[open] summary { color: var(--green-dark); }
+.symptom-item p {
+  padding: 0 18px 16px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--muted);
+  word-break: keep-all;
 }
 
 /* ==========================================================================

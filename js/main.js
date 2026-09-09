@@ -3,7 +3,7 @@
 
   /* Scroll reveal for below-the-fold sections */
   var revealTargets = document.querySelectorAll(
-    '.services-strip .container, .highlight-strip .hl-item, .reviews-head, .marquee-row, .quick-facts-grid .fact, .area-section .area-panel, .services-detail .service-card, .final-cta .container'
+    '.services-strip .container, .service-intro .container, .highlight-strip .hl-item, .reviews-head, .marquee-row, .quick-facts-grid .fact, .area-section .area-panel, .symptom-section .symptom-list, .services-detail .service-card, .final-cta .container'
   );
   revealTargets.forEach(function (el) { el.classList.add('reveal'); });
 
