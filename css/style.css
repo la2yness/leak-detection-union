@@ -290,10 +290,37 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   word-break: keep-all;
 }
 .service-intro-lead { color: var(--navy); font-weight: 700; }
+.service-intro-list {
+  max-width: 480px;
+  margin: 0 auto 12px;
+  padding: 0;
+  list-style: none;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--muted);
+  word-break: keep-all;
+}
+.service-intro-list li {
+  position: relative;
+  padding-left: 16px;
+  margin-bottom: 8px;
+}
+.service-intro-list li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 11px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--green);
+}
 @media (min-width: 640px) {
   .service-intro { padding: 48px 0; }
   .service-intro-title { font-size: 24px; }
   .service-intro p { max-width: 620px; font-size: 16px; }
+  .service-intro-list { max-width: 620px; font-size: 16px; }
+  .service-intro-list li::before { top: 12px; }
 }
 
 /* ==========================================================================
