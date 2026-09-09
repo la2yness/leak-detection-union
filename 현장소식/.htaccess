@@ -1,0 +1,15 @@
+# 현장소식 - pretty URL
+RewriteEngine On
+RewriteBase /현장소식/
+
+# /현장소식/sitemap.xml -> sitemap.php
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+# /현장소식/123  또는  /현장소식/123-온수배관-누수  -> post.php?id=123
+RewriteRule ^([0-9]+)(-[^/]*)?/?$ post.php?id=$1 [L,QSA]
+
+# 내부 include 파일 직접 접근 차단 (_check.php 는 셋업 확인 후 파일째 삭제)
+<FilesMatch "^(_wp|_layout)\.php$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>

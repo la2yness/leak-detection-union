@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://nusu1119.com/sitemap.xml
+Sitemap: https://nusu1119.com/현장소식/sitemap.xml

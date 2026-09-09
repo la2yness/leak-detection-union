@@ -271,7 +271,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* ==========================================================================
    서비스 소개
    ========================================================================== */
-.service-intro { padding: 36px 0; background: var(--white); }
+.service-intro { padding: 36px 0; background: var(--off-white); }
 .service-intro-title {
   font-size: 20px;
   font-weight: 900;
@@ -281,17 +281,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   word-break: keep-all;
 }
 .service-intro p {
+  max-width: 480px;
+  margin: 0 auto 10px;
   font-size: 14.5px;
+  line-height: 1.75;
   color: var(--muted);
   text-align: center;
-  margin-bottom: 10px;
   word-break: keep-all;
 }
 .service-intro-lead { color: var(--navy); font-weight: 700; }
 @media (min-width: 640px) {
   .service-intro { padding: 48px 0; }
   .service-intro-title { font-size: 24px; }
-  .service-intro p { font-size: 16px; }
+  .service-intro p { max-width: 620px; font-size: 16px; }
 }
 
 /* ==========================================================================
@@ -406,21 +408,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .marquee-track { animation: none; }
   .marquee-row { overflow-x: auto; }
 }
-
-/* ==========================================================================
-   Quick facts
-   ========================================================================== */
-.quick-facts { background: var(--off-white); padding: 32px 0; }
-.quick-facts-grid {
-  display: grid;
-  gap: 16px;
-  text-align: center;
-}
-@media (min-width: 640px) {
-  .quick-facts-grid { grid-template-columns: repeat(3, 1fr); }
-}
-.fact strong { display: block; color: var(--navy); font-size: 18px; margin-bottom: 3px; }
-.fact span { font-size: 14.5px; color: var(--muted); }
 
 /* ==========================================================================
    Work gallery
@@ -564,7 +551,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .area-group {
   border-top: 1px solid var(--border);
 }
-.area-group:last-child { border-bottom: 1px solid var(--border); }
 .area-group-name {
   display: block;
   list-style: none;
@@ -743,6 +729,171 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* ==========================================================================
+   현장소식 — 홈 티저(.blog-teaser) + 목록 페이지(/현장소식/) 공용
+   ========================================================================== */
+.blog-teaser { padding: 44px 0 48px; background: var(--off-white); }
+.blog-teaser .container { max-width: 960px; }
+.blog-teaser h2 {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--navy);
+  text-align: center;
+  margin-bottom: 6px;
+}
+.blog-teaser > .container > p {
+  font-size: 15px;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.blog-list { display: grid; grid-template-columns: 1fr; gap: 14px; }
+@media (min-width: 560px) { .blog-list { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .blog-list { grid-template-columns: repeat(4, 1fr); } }
+
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform var(--trans), box-shadow var(--trans);
+}
+.blog-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.blog-card-thumb {
+  display: block;
+  aspect-ratio: 16 / 9;
+  background: var(--navy) center / cover no-repeat;
+}
+.blog-card-body { padding: 15px 16px; display: flex; flex-direction: column; gap: 5px; }
+.blog-card-cat {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--green-dark);
+  background: var(--green-light);
+  border-radius: 999px;
+  padding: 2px 9px;
+}
+.blog-card-title {
+  font-size: 14.5px;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1.45;
+  word-break: keep-all;
+}
+.blog-card-excerpt {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.6;
+  word-break: keep-all;
+}
+.blog-card-date { font-size: 12px; color: #9AA1AF; font-weight: 700; }
+
+.blog-more { text-align: center; margin-top: 26px; }
+.blog-more a {
+  font-weight: 700;
+  color: var(--green-dark);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   현장소식 — 목록 페이지 / 글 상세 (/현장소식/*.php)
+   ========================================================================== */
+.blog-page { padding: 40px 0 48px; background: var(--white); }
+.blog-page .container { max-width: 960px; }
+.blog-page h1 {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--navy);
+  text-align: center;
+  margin-bottom: 6px;
+}
+.blog-page-lead {
+  font-size: 15px;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 28px;
+}
+.blog-empty {
+  text-align: center;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+  padding: 40px 0;
+}
+.blog-empty a { color: var(--green-dark); text-decoration: underline; }
+
+.blog-pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 32px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.blog-pager a { color: var(--green-dark); text-decoration: underline; }
+
+.blog-single { padding: 36px 0 40px; background: var(--white); }
+.blog-single .container { max-width: 760px; }
+.blog-single-meta { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+.blog-single-meta a { color: var(--green-dark); text-decoration: underline; }
+.blog-single-title {
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1.4;
+  word-break: keep-all;
+  margin-bottom: 18px;
+}
+.blog-single-hero {
+  width: 100%;
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+}
+.blog-single-content { font-size: 16px; line-height: 1.8; color: var(--text); }
+.blog-single-content > * { margin-bottom: 18px; }
+.blog-single-content h2 { font-size: 20px; font-weight: 900; color: var(--navy); margin-top: 32px; }
+.blog-single-content h3 { font-size: 17px; font-weight: 700; color: var(--navy); margin-top: 24px; }
+.blog-single-content img,
+.blog-single-content figure { max-width: 100%; height: auto; border-radius: var(--radius-sm); }
+.blog-single-content figure { margin-left: 0; margin-right: 0; }
+.blog-single-content figcaption { font-size: 13px; color: var(--muted); text-align: center; margin-top: 6px; }
+.blog-single-content ul,
+.blog-single-content ol { padding-left: 22px; }
+.blog-single-content li { margin-bottom: 8px; }
+.blog-single-content a { color: var(--green-dark); text-decoration: underline; word-break: break-all; }
+.blog-single-content blockquote {
+  border-left: 3px solid var(--green);
+  padding-left: 16px;
+  color: var(--muted);
+}
+
+.blog-single-cta {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.blog-single-cta > p { font-size: 15px; color: var(--muted); margin-bottom: 16px; word-break: keep-all; }
+.blog-single-cta .final-cta-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 380px;
+  margin: 0 auto;
+}
+@media (min-width: 480px) {
+  .blog-single-cta .final-cta-buttons { flex-direction: row; justify-content: center; max-width: none; }
+}
+.blog-single-back { margin-top: 18px; font-size: 13.5px; }
+.blog-single-back a { color: var(--green-dark); text-decoration: underline; }
+
+/* ==========================================================================
    Final CTA
    ========================================================================== */
 .final-cta {
@@ -841,10 +992,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   transition: opacity .6s ease, transform .6s ease;
 }
 .reveal.revealed { opacity: 1; transform: translateY(0); }
-
-.quick-facts-grid .fact.reveal:nth-child(1) { transition-delay: 0s; }
-.quick-facts-grid .fact.reveal:nth-child(2) { transition-delay: .1s; }
-.quick-facts-grid .fact.reveal:nth-child(3) { transition-delay: .2s; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }

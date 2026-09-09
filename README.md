@@ -5,6 +5,7 @@
 ## 기술 스택
 
 - HTML5 / CSS3 / Vanilla JavaScript — 빌드 툴 없는 정적 사이트
+- `현장소식/` 만 PHP (카페24 웹호스팅 PHP, 워드프레스 REST 서버 렌더)
 - 정적 웹호스팅(카페24) + 커스텀 도메인 `nusu1119.com`
 
 ## 폴더 구조
@@ -13,6 +14,15 @@
 index.html
 css/style.css
 js/main.js
+현장소식/            게시판 (PHP, 아래 "현장소식 게시판" 참고)
+  index.php          목록 (+ ?format=json 홈 티저용)
+  post.php           글 1건 (?id=N)
+  sitemap.php        글 URL 사이트맵 (/현장소식/sitemap.xml)
+  _wp.php            워드프레스 REST 호출(cURL) + 파일 캐시 + 헬퍼
+  _layout.php        공통 head/상단바/하단 통화바/푸터
+  _check.php         셋업 점검용 (확인 후 삭제)
+  .htaccess          pretty URL rewrite
+  cache/             API 응답 캐시 (git 미추적, 쓰기권한 필요)
 images/
   business/business-registration.jpg   사업자등록증
   work/work-01.jpg ~ work-12.jpg       현장 작업사진 갤러리에 쓰이는 사진
@@ -36,7 +46,56 @@ sitemap.xml
 - 현장 작업사진: `images/work/`의 작업사진을 그리드로 보여주고, 사진 클릭 시 이전/다음 전환이 있는 라이트박스로 확대
 - 제공 서비스: 누수탐지·배관누수·수리·막힘·고압세척·위생기기 6개 분류를 카드로 정리
 - 증상별 서비스: 18개 증상을 `<details>` 접기/펼치기 목록으로 안내
+- 현장소식 티저: 최종 CTA 앞에 최근 글 미리보기(`js/main.js`의 `loadBlogTeaser`, 실패 시 숨김)
 - 상단 고정 바와 하단 고정 통화 바로 어느 위치에서든 바로 전화 연결
+
+## 현장소식 게시판
+
+포털이 "활동하지 않는 사이트"로 판단하지 않도록 꾸준한 글을 올리는 공간.
+
+**구조 (헤드리스 + PHP 서버 렌더)**
+
+```
+[사장님] → blog.nusu1119.com/wp-admin   글쓰기 백엔드 전용 (카페24 매니지드 워드프레스, 검색 비노출/noindex)
+                  │ WP REST API (wp-json/wp/v2/posts, _embed)
+                  ▼
+nusu1119.com/현장소식/*.php  ← PHP가 cURL로 API 호출 → cache/(10분 TTL) → SSR HTML
+   /현장소식/            목록 (검색 색인 대상)
+   /현장소식/123         글 1건 (.htaccess pretty URL, 색인 대상)
+   /현장소식/sitemap.xml 글 사이트맵
+nusu1119.com/index.html  정적 유지 + 하단 티저(JS가 /현장소식/index.php?format=json 호출, 4초 타임아웃, 실패 시 숨김)
+                         푸터에 /현장소식/ 정적 링크 (JS 무관 크롤 경로)
+```
+
+워드프레스는 아무도 방문하지 않으므로 테마를 꾸미지 않는다. `allow_url_fopen`이 꺼져 있어 `_wp.php`는 반드시 cURL을 쓴다.
+
+**1회 셋업 체크리스트**
+
+1. `blog.nusu1119.com` 서브도메인 연결 + Let's Encrypt SSL, WP 주소/사이트 주소 = `https://blog.nusu1119.com`
+2. WP 설정 → 읽기 → "검색엔진이 색인하지 않도록 요청" 체크 (noindex)
+3. WP 설정 → 토론 → 댓글/핑백 해제, 샘플 글·페이지 삭제
+4. 카테고리 4개 생성: 현장사례(`case`) · 누수상식(`tips`) · 자주묻는질문(`faq`) · 공지사항(`notice`), 기본 카테고리 = 현장사례, "미분류" 삭제
+5. `현장소식/` 디렉토리를 웹호스팅 루트에 업로드, `현장소식/cache/` 쓰기권한 부여(707 또는 777)
+6. 브라우저로 `nusu1119.com/현장소식/_check.php` 열어 cURL·캐시·API 확인 → **`_check.php` 삭제**
+7. `nusu1119.com/현장소식/` 접근 확인. 한글 폴더 URL 문제 시 로마자 폴더로 교체(`_wp.php`의 `BOARD_PATH`, JS/HTML/`.htaccess`/`sitemap.xml`/`robots.txt`의 `/현장소식/` 일괄 치환)
+8. 네이버 서치어드바이저 / 구글 서치콘솔에 `https://nusu1119.com/현장소식/sitemap.xml` 제출. `blog.nusu1119.com`은 등록하지 않음
+
+**사장님 포스팅 (5단계)**
+
+1. `blog.nusu1119.com/wp-admin` 로그인
+2. 글 → 새로 추가
+3. 제목 입력 → 본문에 현장 사진 드래그 + 설명
+4. 오른쪽: 대표 이미지 지정 + 카테고리 선택
+5. 공개
+
+→ 약 10분 내(캐시 TTL) `nusu1119.com/현장소식/`와 홈 티저에 자동 반영. 발행 후 서치어드바이저에서 새 URL "수집 요청" 하면 색인이 빠르다.
+
+**트러블슈팅 — 글이 안 보여요**
+
+- 캐시 TTL(10분) 대기, 또는 `현장소식/cache/*.json` 삭제
+- `현장소식/cache/` 쓰기권한 확인
+- `blog.nusu1119.com/wp-json/wp/v2/posts` 직접 열어 응답 확인 (워드프레스가 켜져 있는지)
+- `_check.php`를 다시 올려 cURL 외부호출 차단 여부 확인 (차단 시 카페24 문의)
 
 ## 동별 랜딩페이지
 
@@ -47,13 +106,14 @@ sitemap.xml
   - `서초구` → 대상 동이 속한 구
   - 서비스 지역 리드 문구의 인접 동(`서초동·우면동·도곡동·개포동·염곡동`) → 대상 동의 인접 동
   - JSON-LD `areaServed` → 대상 동/구
-- 페이지 추가 시: ① 파일 생성 ② `sitemap.xml`에 `<url>` 추가(loc은 퍼센트 인코딩) ③ `index.html` 서비스 지역의 해당 동 이름을 링크로 전환 ④ 네이버 광고그룹 랜딩 URL을 해당 동 페이지로 지정(미제작 동은 메인으로)
+- 페이지 추가 시: ① 파일 생성 ② `sitemap.xml`에 `<url>` 추가(loc은 퍼센트 인코딩) ③ `index.html` 서비스 지역의 해당 동 이름을 링크로 전환 ④ 네이버 광고그룹 랜딩 URL을 해당 동 페이지로 지정(미제작 동은 메인으로) ⑤ `.blog-teaser` 섹션과 푸터 `/현장소식/` 링크가 포함됐는지 확인
 - 콘텐츠 소스: `keyword/{동}키워드_*.txt`
 - 중복 콘텐츠 감점을 피하기 위해 광고를 집행하는 상위 동만 순차 제작한다.
 
 ## 배포
 
 정적 파일을 그대로 웹호스팅 루트에 업로드. 별도 빌드 과정 없음.
+`현장소식/`도 그대로 업로드(PHP는 서버에서 실행). `현장소식/cache/`는 쓰기권한만 챙기면 되고 내용은 배포 대상 아님.
 
 ## 남은 작업 (TODO)
 
