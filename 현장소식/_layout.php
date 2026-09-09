@@ -28,6 +28,7 @@ function layout_top(array $meta): void
 <title><?= e($title) ?></title>
 <meta name="description" content="<?= e($description) ?>">
 <meta name="robots" content="<?= e($robots) ?>">
+<meta name="naver-site-verification" content="418d4ac7554d9c9e0f8033d0da20d7df61a4b3a4" />
 <link rel="canonical" href="<?= e($canonical) ?>">
 
 <meta property="og:type" content="article">
