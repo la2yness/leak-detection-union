@@ -47,7 +47,8 @@ function wp_api_get(string $path, int $ttl = 600): array
             'data'        => $result['data'],
             'total_pages' => $result['total_pages'],
         ];
-        if (is_dir(CACHE_DIR) && is_writable(CACHE_DIR)) {
+        // 빈 결과는 캐시하지 않는다 (새 글 발행 직후 곧바로 반영되도록)
+        if (!empty($result['data']) && is_dir(CACHE_DIR) && is_writable(CACHE_DIR)) {
             @file_put_contents($cacheFile, json_encode($payload), LOCK_EX);
         }
         $payload['ok'] = true;
