@@ -23,5 +23,6 @@ package-lock.json
 *.log
 *.tmp
 
-# 현장소식 게시판 캐시 (런타임 생성)
 현장소식/cache/*.json
+keyword/
+blog/

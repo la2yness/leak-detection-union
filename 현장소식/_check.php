@@ -23,8 +23,9 @@ $ms = round((microtime(true) - $t) * 1000);
 
 if ($fetched === null) {
     echo "결과 : 실패\n";
-    echo "  → blog.nusu1119.com 워드프레스가 켜져 있는지, 서브도메인/SSL이 정상인지,\n";
-    echo "    카페24가 외부 cURL 호출을 막고 있지는 않은지 확인하세요.\n";
+    echo "  → nusu1119.com/blog/ 워드프레스가 정상 동작하는지(관리자 로그인 되는지),\n";
+    echo "    nusu1119.com/blog/wp-json/wp/v2/posts 가 브라우저에서 열리는지,\n";
+    echo "    카페24가 서버→자기도메인 cURL 호출(루프백)을 막고 있지는 않은지 확인하세요.\n";
 } else {
     $count = count($fetched['data']);
     echo "결과 : OK ({$ms}ms, 글 {$count}건 수신)\n";

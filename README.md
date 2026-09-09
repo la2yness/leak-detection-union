@@ -56,8 +56,8 @@ sitemap.xml
 **구조 (헤드리스 + PHP 서버 렌더)**
 
 ```
-[사장님] → blog.nusu1119.com/wp-admin   글쓰기 백엔드 전용 (카페24 매니지드 워드프레스, 검색 비노출/noindex)
-                  │ WP REST API (wp-json/wp/v2/posts, _embed)
+[사장님] → nusu1119.com/blog/wp-admin   글쓰기 백엔드 전용 (웹호스팅 /blog 하위 워드프레스, 검색 비노출/noindex)
+                  │ WP REST API (blog/wp-json/wp/v2/posts, _embed)
                   ▼
 nusu1119.com/현장소식/*.php  ← PHP가 cURL로 API 호출 → cache/(10분 TTL) → SSR HTML
    /현장소식/            목록 (검색 색인 대상)
@@ -67,22 +67,30 @@ nusu1119.com/index.html  정적 유지 + 하단 티저(JS가 /현장소식/index
                          푸터에 /현장소식/ 정적 링크 (JS 무관 크롤 경로)
 ```
 
-워드프레스는 아무도 방문하지 않으므로 테마를 꾸미지 않는다. `allow_url_fopen`이 꺼져 있어 `_wp.php`는 반드시 cURL을 쓴다.
+워드프레스는 웹호스팅 루트가 아니라 `/blog` 하위에 둔다(루트는 정적 사이트). 아무도 직접 방문하지 않으므로 테마는 꾸미지 않는다.
+`allow_url_fopen`이 꺼져 있어 `_wp.php`는 반드시 cURL을 쓴다. WP 주소는 `_wp.php`의 `WP_API_BASE` 한 곳에서 관리.
 
 **1회 셋업 체크리스트**
 
-1. `blog.nusu1119.com` 서브도메인 연결 + Let's Encrypt SSL, WP 주소/사이트 주소 = `https://blog.nusu1119.com`
-2. WP 설정 → 읽기 → "검색엔진이 색인하지 않도록 요청" 체크 (noindex)
-3. WP 설정 → 토론 → 댓글/핑백 해제, 샘플 글·페이지 삭제
-4. 카테고리 4개 생성: 현장사례(`case`) · 누수상식(`tips`) · 자주묻는질문(`faq`) · 공지사항(`notice`), 기본 카테고리 = 현장사례, "미분류" 삭제
-5. `현장소식/` 디렉토리를 웹호스팅 루트에 업로드, `현장소식/cache/` 쓰기권한 부여(707 또는 777)
-6. 브라우저로 `nusu1119.com/현장소식/_check.php` 열어 cURL·캐시·API 확인 → **`_check.php` 삭제**
-7. `nusu1119.com/현장소식/` 접근 확인. 한글 폴더 URL 문제 시 로마자 폴더로 교체(`_wp.php`의 `BOARD_PATH`, JS/HTML/`.htaccess`/`sitemap.xml`/`robots.txt`의 `/현장소식/` 일괄 치환)
-8. 네이버 서치어드바이저 / 구글 서치콘솔에 `https://nusu1119.com/현장소식/sitemap.xml` 제출. `blog.nusu1119.com`은 등록하지 않음
+1. 워드프레스를 웹호스팅 `/blog` 폴더에 설치 (또는 루트 설치본을 `/blog`로 이동 후 아래 3번 처리)
+2. `blog/wp-config.php` 에 사이트 주소 고정 (이동/서브폴더 설치 시 필수):
+   ```php
+   define('WP_HOME',    'https://nusu1119.com/blog');
+   define('WP_SITEURL', 'https://nusu1119.com/blog');
+   ```
+   `/* That's all, stop editing! */` 줄 위에 추가.
+3. `blog/.htaccess` 의 `RewriteBase` / `RewriteRule` 을 `/blog/` 기준으로 수정 (WP 관리자 → 설정 → 고유주소 저장하면 자동 재생성됨)
+4. WP 설정 → 읽기 → "검색엔진이 색인하지 않도록 요청" 체크 (noindex)
+5. WP 설정 → 토론 → 댓글/핑백 해제, 샘플 글·페이지 삭제
+6. 카테고리 4개 생성: 현장사례(`case`) · 누수상식(`tips`) · 자주묻는질문(`faq`) · 공지사항(`notice`), 기본 카테고리 = 현장사례, "미분류" 삭제
+7. 정적 사이트 파일 전체 + `현장소식/` 를 웹호스팅 루트에 업로드, 루트의 워드프레스 잔재(`wp-*.php`, `index.php`, `readme.html`, `license.txt`, `hosting_index.html` 등) 삭제. `현장소식/cache/` 쓰기권한 707(또는 777)
+8. 브라우저로 `nusu1119.com/현장소식/_check.php` 열어 cURL·캐시·API 확인 → **`_check.php` 삭제**
+9. `nusu1119.com/현장소식/` 접근 확인. 한글 폴더 URL 문제 시 로마자 폴더로 교체(`_wp.php`의 `BOARD_PATH`, JS/HTML/`.htaccess`/`sitemap.xml`/`robots.txt`의 `/현장소식/` 일괄 치환)
+10. 네이버 서치어드바이저 / 구글 서치콘솔에 `https://nusu1119.com/현장소식/sitemap.xml` 제출. `/blog`는 등록하지 않음 (noindex)
 
 **사장님 포스팅 (5단계)**
 
-1. `blog.nusu1119.com/wp-admin` 로그인
+1. `nusu1119.com/blog/wp-admin` 로그인
 2. 글 → 새로 추가
 3. 제목 입력 → 본문에 현장 사진 드래그 + 설명
 4. 오른쪽: 대표 이미지 지정 + 카테고리 선택
@@ -94,8 +102,31 @@ nusu1119.com/index.html  정적 유지 + 하단 티저(JS가 /현장소식/index
 
 - 캐시 TTL(10분) 대기, 또는 `현장소식/cache/*.json` 삭제
 - `현장소식/cache/` 쓰기권한 확인
-- `blog.nusu1119.com/wp-json/wp/v2/posts` 직접 열어 응답 확인 (워드프레스가 켜져 있는지)
-- `_check.php`를 다시 올려 cURL 외부호출 차단 여부 확인 (차단 시 카페24 문의)
+- `nusu1119.com/blog/wp-json/wp/v2/posts` 직접 열어 응답(JSON)이 나오는지 확인
+- 서버→자기도메인 cURL 루프백이 막혔으면 `_wp.php`의 `WP_API_BASE`를 `http://127.0.0.1/blog/wp-json/wp/v2/` 로 바꾸고 `_wp.php` `wp_api_fetch`에 `CURLOPT_HTTPHEADER: ['Host: nusu1119.com']` 추가, 또는 카페24 문의
+- `_check.php`를 다시 올려 원인 확인
+
+**워드프레스가 /blog 로 옮긴 뒤 wp-admin 접속 안 되고 이미지 깨질 때** (지금 상황)
+
+1. `blog/wp-config.php` 에 위 2번의 `WP_HOME` / `WP_SITEURL` 두 줄 추가 → 저장
+2. `nusu1119.com/blog/wp-admin` 재접속
+3. 로그인되면 설정 → 고유주소 → (변경 없이) **저장** 클릭 → `.htaccess` 재생성
+4. 그래도 안 되면 `blog/.htaccess` 를 아래로 교체:
+   ```apache
+   # BEGIN WordPress
+   <IfModule mod_rewrite.c>
+   RewriteEngine On
+   RewriteBase /blog/
+   RewriteRule ^index\.php$ - [L]
+   RewriteCond %{REQUEST_FILENAME} !-f
+   RewriteCond %{REQUEST_FILENAME} !-d
+   RewriteRule . /blog/index.php [L]
+   </IfModule>
+   # END WordPress
+   ```
+5. DB를 직접 고칠 수 있으면(phpMyAdmin): `wp_options` 테이블에서 `option_name` 이 `siteurl`, `home` 인 두 행의 값을 `https://nusu1119.com/blog` 로
+
+> 카페24 간편설치 워드프레스는 표준 WP다. 카페24와 도메인/경로로 별도 통신하는 부분은 없으니 폴더 이동 자체는 안전하고, 위 siteurl/home/.htaccess 3가지만 맞추면 된다.
 
 ## 동별 랜딩페이지
 

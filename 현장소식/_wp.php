@@ -2,12 +2,15 @@
 /**
  * 현장소식 - 워드프레스 REST 연동 공통 모듈
  *
- * blog.nusu1119.com 은 글쓰기 백엔드 전용(검색 비노출).
+ * 워드프레스는 nusu1119.com/blog/ 하위에 설치(글쓰기 백엔드 전용, 검색 비노출).
  * 이 파일이 서버측에서 cURL 로 WP REST API 를 호출하고 파일 캐시에 저장한다.
  * 카페24 웹호스팅은 allow_url_fopen=OFF 이므로 반드시 cURL 을 쓴다.
+ *
+ * 같은 서버라 cURL 루프백이 막히면 WP_API_BASE 를 'http://127.0.0.1/blog/wp-json/wp/v2/'
+ * (Host 헤더 필요) 등으로 바꿔야 할 수 있다. 우선 공개 https 주소로 시도한다.
  */
 
-const WP_API_BASE = 'https://blog.nusu1119.com/wp-json/wp/v2/';
+const WP_API_BASE = 'https://nusu1119.com/blog/wp-json/wp/v2/';
 const SITE_BASE   = 'https://nusu1119.com';
 const BOARD_PATH  = '/현장소식/';
 const CACHE_DIR   = __DIR__ . '/cache';
