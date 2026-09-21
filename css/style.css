@@ -208,8 +208,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     justify-content: center;
     position: relative;
     flex-shrink: 0;
-    width: 280px;
-    height: 280px;
+    width: 420px;
+    height: 420px;
   }
   .hero-visual-glow {
     position: absolute;
@@ -281,6 +281,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   max-width: 420px;
   height: 220px;
   object-fit: cover;
+  object-position: center 73%;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   margin: 0 auto 20px;
@@ -405,8 +406,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   gap: 12px;
   width: max-content;
 }
-.marquee-left { animation: marquee-scroll 36s linear infinite; }
-.marquee-right { animation: marquee-scroll-reverse 36s linear infinite; }
+.marquee-left { animation: marquee-scroll 60s linear infinite; }
+.marquee-right { animation: marquee-scroll-reverse 60s linear infinite; }
 
 @media (max-width: 639px) {
   .marquee-left, .marquee-right { animation-duration: 76s; }
