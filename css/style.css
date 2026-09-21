@@ -10,6 +10,9 @@
   --green-dark: #0F8A3C;
   --green-light: #ECFDF3;
   --cyan: #29B6F6;
+  --amber: #F59E0B;
+  --amber-dark: #B45309;
+  --amber-light: #FEF3E2;
   --text: #16181D;
   --muted: #6B7280;
   --border: #E5E9F2;
@@ -140,8 +143,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   display: inline-block;
   padding: 10px 22px;
   border-radius: 999px;
-  background: var(--green-light);
-  color: var(--green-dark);
+  background: var(--amber-light);
+  color: var(--amber-dark);
   font-size: 18px;
   font-weight: 700;
   margin-bottom: 22px;
@@ -272,6 +275,16 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    서비스 소개
    ========================================================================== */
 .service-intro { padding: 36px 0; background: var(--off-white); }
+.service-intro-photo {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin: 0 auto 20px;
+}
 .service-intro-title {
   font-size: 20px;
   font-weight: 900;
@@ -317,6 +330,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 @media (min-width: 640px) {
   .service-intro { padding: 48px 0; }
+  .service-intro-photo { max-width: 520px; height: 280px; }
   .service-intro-title { font-size: 24px; }
   .service-intro p { max-width: 620px; font-size: 16px; }
   .service-intro-list { max-width: 620px; font-size: 16px; }
@@ -411,7 +425,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .review-photo {
   flex-shrink: 0;
-  height: 220px;
+  height: 300px;
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--off-white);
@@ -428,7 +442,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 @media (min-width: 640px) {
-  .review-photo { height: 273px; }
+  .review-photo { height: 420px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -569,6 +583,16 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-size: 15px;
   color: var(--muted);
   margin-bottom: 18px;
+}
+.area-panel-photo {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  height: 190px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  margin: 0 auto 22px;
 }
 .area-groups {
   max-width: 600px;
