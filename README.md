@@ -20,6 +20,7 @@ images/
   work/               현장 작업사진
   review/             고객 후기
   business/           사업자등록증 등
+  symptom-icons/      증상 아이콘
 현장소식/              게시판 (PHP)
   index.php           
   post.php            
@@ -41,7 +42,7 @@ sitemap.xml
 → 서비스 지역(5개 생활권 `<details>`)
 → 현장 작업사진(그리드 + 라이트박스)
 → 제공 서비스(6개 카드)
-→ 증상별 서비스(18개 `<details>`)
+→ 증상별 서비스(18개 카드 `<details>`)
 → 현장소식 티저
 → 최종 CTA
 상단 고정바 + 하단 고정 통화바
